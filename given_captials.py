@@ -1,9 +1,9 @@
 # File:    capitals.py
 # Started: by Dr. Gibson
-# Author:  YOUR NAME GOES EHRE
-# Date:    DATE GOES HERE
-# Section: SECTION NUMBER GOES HERE
-# E-mail:  EMAIL_GOES_HERE@umbc.edu
+# Author:  Uzoma Uwanamodo
+# Date:    11/16/2016
+# Section: 05
+# E-mail:  uu3@umbc.edu
 # Description:
 #   This file contains python code that reads in a list of
 #   states and their capitals, stores it in a dictionary,
@@ -24,16 +24,23 @@ def convertToDict(fileContents):
     dict1 = {}
 
     # write the rest of the function (including the return)
+    for line in fileContents:
+        splitLine = line.strip().split(",")
+        dict1[splitLine[0]] = splitLine[1]
 
-
+    return dict1
 
 def main():
 
     stateCapFile = open("stateCaps.txt")
     # a function call to convertToDict goes here
-
+    statesCaps = {}
+    statesCaps = convertToDict(stateCapFile)
+    
     stateCapFile.close()
-
+    
+    STATES = statesCaps.keys()
+    
     print("Welcome to the State Capital Lookup System")
     # message with all the prompts for the user
     msg = "\n\tPlease enter the state you want the capital of.\n" + \
@@ -44,17 +51,10 @@ def main():
 
     # this should be a while loop that runs until the user chooses to "exit"
     # MAKE SURE TO USE THE CONSTANTS DEFINED AT THE TOP OF THE FILE!!!
-
+    while choice != QUIT:
         # inside the loop: if the user enters "list", show all the states
-
-        # inside the loop: otherwise; check if the state exists
-
-            # if the state exists, print its capital
-
-            # otherwise, print that it is not a state
-
-
-        # at the end of the while loop, get a new user input
+        print("The capital of %s is %s" % (choice, statesCaps[choice]) if choice in statesCaps else "\n".join(STATES) if choice == SHOW_ALL else "Sorry, %s is not a state" % choice)
+        choice = input(msg)
 
 
     print("Thank you for using the State Capital Lookup System!")
